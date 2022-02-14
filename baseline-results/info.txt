@@ -1,0 +1,15 @@
+config
+bz=32
+shuffle_data=True
+normalization_mean=(0.485, 0.456, 0.406)
+normalization_std=(0.229, 0.224, 0.225)
+epoch=25
+criterion=cross_entropy
+optimizer=adam
+lr=1e-3
+weight_decay=0
+lr_scheduling=False
+
+results:
+Test Loss: 1.7191655573191915
+Test Accuracy: 47.48

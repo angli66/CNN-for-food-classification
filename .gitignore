@@ -133,3 +133,6 @@ dmypy.json
 
 # Data set
 food-101/
+
+# Results
+results.pkl

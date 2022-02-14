@@ -89,9 +89,9 @@ def train_model(model, criterion, optimizer, scheduler, device, dataloaders, arg
                 correct += (prediction == targets).sum().item()
             val_acc.append(correct / total * 100)
         
-        print("Loss on train set: ", train_loss[-1])
+        print("Loss on train set:", train_loss[-1])
         print(f"Accuracy on train set: {train_acc[-1]}%")
-        print("Loss on validation set: ", val_loss[-1])
+        print("Loss on validation set:", val_loss[-1])
         print(f"Accuracy on validation set: {val_acc[-1]}%")
         
         # Adapt learning rate if scheduler is initialized
