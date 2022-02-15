@@ -55,16 +55,6 @@ def train_model(model, criterion, optimizer, scheduler, device, dataloaders, arg
         # Start evaluating the model
         model.eval()
 
-        # Calculate the loss on validation set
-        running_val_loss = 0.0
-        with torch.no_grad():
-            for inputs, targets in val_dataloader:
-                inputs, targets = inputs.to(device), targets.to(device)
-                outputs = model(inputs)
-                loss = criterion(outputs, targets)
-                running_val_loss += loss.item()
-            val_loss.append(running_val_loss / len(val_dataloader))
-        
         # Calculate the accuracy on train set
         total = 0
         correct = 0
@@ -76,17 +66,25 @@ def train_model(model, criterion, optimizer, scheduler, device, dataloaders, arg
                 total += targets.size(0)
                 correct += (prediction == targets).sum().item()
             train_acc.append(correct / total * 100)
-        
-        # Calculate the accuracy on validation set
+
+        # Calculate the loss and accuracy on validation set
+        running_val_loss = 0.0
         total = 0
         correct = 0
         with torch.no_grad():
             for inputs, targets in val_dataloader:
+                # Loss
                 inputs, targets = inputs.to(device), targets.to(device)
                 outputs = model(inputs)
+                loss = criterion(outputs, targets)
+                running_val_loss += loss.item()
+
+                # Accuracy
                 _, prediction = torch.max(outputs.data, 1)
                 total += targets.size(0)
                 correct += (prediction == targets).sum().item()
+
+            val_loss.append(running_val_loss / len(val_dataloader))
             val_acc.append(correct / total * 100)
         
         print("Loss on train set:", train_loss[-1])
@@ -100,26 +98,24 @@ def train_model(model, criterion, optimizer, scheduler, device, dataloaders, arg
     
     print('Finish training.')
 
-    # Calculate the loss on test set
+    # Calculate the loss and accuracy on test set
     running_test_loss = 0.0
-    with torch.no_grad():
-        for inputs, targets in test_dataloader:
-            inputs, targets = inputs.to(device), targets.to(device)
-            outputs = model(inputs)
-            loss = criterion(outputs, targets)
-            running_test_loss += loss.item()
-        test_loss = running_test_loss / len(test_dataloader)
-    
-    # Calculate the accuracy on test set
     total = 0
     correct = 0
     with torch.no_grad():
         for inputs, targets in test_dataloader:
+            # Loss
             inputs, targets = inputs.to(device), targets.to(device)
             outputs = model(inputs)
+            loss = criterion(outputs, targets)
+            running_test_loss += loss.item()
+
+            # Accuracy
             _, prediction = torch.max(outputs.data, 1)
             total += targets.size(0)
             correct += (prediction == targets).sum().item()
+
+        test_loss = running_test_loss / len(test_dataloader)
         test_acc = correct / total * 100
 
     print("Loss on test set: ", test_loss)
