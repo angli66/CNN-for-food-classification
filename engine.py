@@ -36,7 +36,6 @@ def train_model(model, criterion, optimizer, scheduler, device, dataloaders, arg
     val_acc = []
 
     best_val_loss = 65535
-    best_model = None
 
     print(args)
 
