@@ -36,7 +36,7 @@ parser.add_argument('--normalization_std', default=(0.229, 0.224, 0.225), type=t
 
 
 # Other Choices & hyperparameters
-parser.add_argument('--epoch', default=40, type=int,
+parser.add_argument('--epoch', default=25, type=int,
                     help='number of epochs')
     # for loss
 parser.add_argument('--criterion', default='cross_entropy', type=str,
@@ -44,7 +44,7 @@ parser.add_argument('--criterion', default='cross_entropy', type=str,
     # for optimizer
 parser.add_argument('--optimizer', default='adam', type=str,
                     help='which optimizer to use')
-parser.add_argument('--lr', default=4e-4, type=float,
+parser.add_argument('--lr', default=1e-3, type=float,
                     help='learning rate')
 # parser.add_argument('--momentum', default=0.9, type=float,
 #                     help='momentum')
