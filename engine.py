@@ -35,6 +35,11 @@ def train_model(model, criterion, optimizer, scheduler, device, dataloaders, arg
     train_acc = []
     val_acc = []
 
+    best_val_loss = 65535
+    best_model = None
+
+    print(args)
+
     for epoch in range(args['epoch']):
         print(f'Epoch {epoch}...')
         train_dataloader, val_dataloader, test_dataloader = dataloaders
@@ -91,12 +96,18 @@ def train_model(model, criterion, optimizer, scheduler, device, dataloaders, arg
         print(f"Accuracy on train set: {train_acc[-1]}%")
         print("Loss on validation set:", val_loss[-1])
         print(f"Accuracy on validation set: {val_acc[-1]}%")
+
+        if val_loss[-1] < best_val_loss:
+            best_val_loss = val_loss[-1]
+            torch.save(model.state_dict(), "checkpoint.pt")
         
         # Adapt learning rate if scheduler is initialized
         if scheduler is not None:
             scheduler.step()
     
     print('Finish training.')
+
+    model.load_state_dict(torch.load("checkpoint.pt"))
 
     # Calculate the loss and accuracy on test set
     running_test_loss = 0.0
