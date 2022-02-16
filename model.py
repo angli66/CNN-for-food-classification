@@ -53,7 +53,7 @@ class baseline(nn.Module):
 
 class custom(nn.Module):
     def __init__(self):
-        super(baseline, self).__init__()
+        super(custom, self).__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3) # 3 input image channels (RGB), 64 output channels, 3x3 convolution kernel
         self.bn1 = nn.BatchNorm2d(64) # 64 input channels
         self.conv2 = nn.Conv2d(64, 128, kernel_size=3)
@@ -124,4 +124,6 @@ def get_model(args):
         model = baseline()
     elif args['model'] == 'custom':
         model = custom()
+    else:
+        NotImplementedError("get_model not implemented")
     return model
