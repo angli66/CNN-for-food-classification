@@ -16,7 +16,7 @@ parser.add_argument('--device_id', default=0, type=int,
 # Model Related
 parser.add_argument('--model', default='custom', type=str,
                     help='Model being used')
-parser.add_argument('--pt_ft', default=True, type=bool,
+parser.add_argument('--pt_ft', default=1, type=int,
                     help='Determine if the model is for partial fine-tune mode')
 # parser.add_argument('--model_dir', default=None, type=str,
 #                     help='Load some saved parameters for the current model')
@@ -26,7 +26,7 @@ parser.add_argument('--pt_ft', default=True, type=bool,
 # Data Related
 parser.add_argument('--bz', default=32, type=int,
                     help='batch size')
-parser.add_argument('--shuffle_data', default=True, type=bool,
+parser.add_argument('--shuffle_data', default=1, type=int,
                     help='Shuffle the data')
 parser.add_argument('--normalization_mean', default=(0.485, 0.456, 0.406), type=tuple,
                     help='Mean value of z-scoring normalization for each channel in image')
@@ -55,7 +55,7 @@ parser.add_argument('--lr', default=1e-3, type=float,
 parser.add_argument('--weight_decay', default=0, type=float,
                     help='weight decay') # TODO: Try with 1e-4
 # for scheduler
-parser.add_argument('--lr_scheduling', default=False, type=bool,
+parser.add_argument('--lr_scheduling', default=0, type=int,
                     help='Enable learning rate scheduling')
 parser.add_argument('--lr_scheduler', default='steplr', type=str,
                     help='learning rate scheduler') 

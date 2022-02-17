@@ -125,7 +125,7 @@ def get_model(args):
         model.fc = nn.Linear(512, 20)
         nn.init.kaiming_normal_(model.fc.weight)
 
-        if args['pt_ft'] is True:
+        if args['pt_ft'] == True:
             for name, param in model.named_parameters():
                 if not 'fc' in name:
                     param.requires_grad = False
@@ -135,7 +135,7 @@ def get_model(args):
         model.classifier[-1] = nn.Linear(4096, 20)
         nn.init.kaiming_normal_(model.classifier[-1].weight)
 
-        if args['pt_ft'] is True:
+        if args['pt_ft'] == True:
             for name, param in model.named_parameters():
                 if not 'classifier.6' in name:
                     param.requires_grad = False
