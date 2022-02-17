@@ -16,8 +16,8 @@ parser.add_argument('--device_id', default=0, type=int,
 # Model Related
 parser.add_argument('--model', default='custom', type=str,
                     help='Model being used')
-# parser.add_argument('--pt_ft', default=1, type=int,
-#                     help='Determine if the model is for partial fine-tune mode')
+parser.add_argument('--pt_ft', default=True, type=bool,
+                    help='Determine if the model is for partial fine-tune mode')
 # parser.add_argument('--model_dir', default=None, type=str,
 #                     help='Load some saved parameters for the current model')
 # parser.add_argument('--num_classes', default=20, type=int,

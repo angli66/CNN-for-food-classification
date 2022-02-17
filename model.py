@@ -113,17 +113,34 @@ class custom(nn.Module):
 
         return x
 
-class resnet(nn.Module):
-    pass
-
-class vgg(nn.Module):
-    pass
-
 def get_model(args):
     if args['model'] == 'baseline':
         model = baseline()
+
     elif args['model'] == 'custom':
         model = custom()
+
+    elif args['model'] == 'resnet18':
+        model = models.resnet18(pretrained=True)
+        model.fc = nn.Linear(512, 20)
+        nn.init.kaiming_normal_(model.fc.weight)
+
+        if args['pt_ft'] is True:
+            for name, param in model.named_parameters():
+                if not 'fc' in name:
+                    param.requires_grad = False
+    
+    elif args['model'] == 'vgg16':
+        model = models.vgg16(pretrained=True)
+        model.classifier[-1] = nn.Linear(4096, 20)
+        nn.init.kaiming_normal_(model.classifier[-1].weight)
+
+        if args['pt_ft'] is True:
+            for name, param in model.named_parameters():
+                if not 'classifier.6' in name:
+                    param.requires_grad = False
+
     else:
-        NotImplementedError("get_model not implemented")
+        raise NotImplementedError(f"get_model not implemented for model {args}")
+    
     return model

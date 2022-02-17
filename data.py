@@ -48,9 +48,9 @@ def get_dataset(csv_path, transform):
 def create_dataloaders(train_set, val_set, test_set, args=None):
     batch_size = args['bz'];
     shuffle_data = args['shuffle_data'];
-    train_dataloader = DataLoader(train_set, batch_size=batch_size, shuffle=shuffle_data)
-    val_dataloader = DataLoader(val_set, batch_size=batch_size, shuffle=False)
-    test_dataloader = DataLoader(test_set, batch_size=batch_size, shuffle=False)
+    train_dataloader = DataLoader(train_set, batch_size=batch_size, shuffle=shuffle_data, num_workers=1)
+    val_dataloader = DataLoader(val_set, batch_size=batch_size, shuffle=False, num_workers=1)
+    test_dataloader = DataLoader(test_set, batch_size=batch_size, shuffle=False, num_workers=1)
     return train_dataloader, val_dataloader, test_dataloader
 
 # Take train set csv data and test set csv data and generate dataloaders
