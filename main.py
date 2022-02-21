@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--device_id', default=0, type=int,
                     help='the id of the gpu to use')    
 # Model Related
-parser.add_argument('--model', default='custom', type=str,
+parser.add_argument('--model', default='baseline', type=str,
                     help='Model being used')
 parser.add_argument('--pt_ft', default=1, type=int,
                     help='Determine if the model is for partial fine-tune mode')
@@ -27,7 +27,7 @@ parser.add_argument('--normalization_std', default=(0.229, 0.224, 0.225), type=t
 
 
 # Other Choices & hyperparameters
-parser.add_argument('--epoch', default=30, type=int,
+parser.add_argument('--epoch', default=25, type=int,
                     help='number of epochs')
     # for loss
 parser.add_argument('--criterion', default='cross_entropy', type=str,
@@ -35,7 +35,7 @@ parser.add_argument('--criterion', default='cross_entropy', type=str,
     # for optimizer
 parser.add_argument('--optimizer', default='adam', type=str,
                     help='which optimizer to use')
-parser.add_argument('--lr', default=1e-4, type=float,
+parser.add_argument('--lr', default=0.001, type=float,
                     help='learning rate')
 parser.add_argument('--weight_decay', default=0, type=float,
                     help='weight decay') # TODO: Try with 1e-4
