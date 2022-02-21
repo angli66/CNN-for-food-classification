@@ -31,7 +31,8 @@ To run the code, run the ```main.py``` file and there are arguments that user ca
 
 Directly run the code with
 ```bash
-python3 main.py```
+python3 main.py
+```
 will train the and test the performance of baseline model. The results will be saved in ```results.pkl``` after training is finished, and can be used by ```visualization.ipynb``` to visualize the loss/accuracy graph.
 
 ## Files
